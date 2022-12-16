@@ -5,13 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 @Entity
 public class ItemEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long no;
-
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long no;
 
 }

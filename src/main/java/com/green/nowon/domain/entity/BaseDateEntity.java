@@ -10,8 +10,10 @@ import java.time.LocalDateTime;
 @Getter
 @MappedSuperclass
 public class BaseDateEntity {
-    @CreationTimestamp
-    private LocalDateTime createdDate;  //생성일
-    @UpdateTimestamp
-    private LocalDateTime updatedDate;  //수정일
+	
+	@CreationTimestamp
+	private LocalDateTime createdDate;
+	@UpdateTimestamp
+	private LocalDateTime updatedDate;
+
 }

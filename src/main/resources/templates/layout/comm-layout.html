@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	  th:fragment="commLayout(head,main)">
+	  th:fragment="commLayout(head, main)">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>Insert title here</title>
 	<link rel="stylesheet" href="/css/commons/common.css">
-	<!-- 추가 head 소스가 삽입되는 지점입니다.-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<!-- 추가head 소스가 삽입되는 지점입니다. -->
 	<th:block th:replace="${head}"/>
 </head>
 <body>
 <header>
 	<h1>상단영역</h1>
 	<div class="wrap view-size">
-		<!--<p>메뉴와 로고 등을 구현합니다.</p>-->
+		<!-- <p>메뉴와로그등을 구현합니다.</p> -->
 		<nav>
 			<h1>메뉴</h1>
 			<div class="wrap">
@@ -24,10 +25,10 @@
 					<li sec:authorize="isAnonymous()">
 						<a href="/member/login">로그인</a>
 						<a href="/member/signup">회원가입</a>
+						<a href="/common/chat">메세지</a>
 					</li>
-
 					<li sec:authorize="isAuthenticated()">
-						<!--<span th:text="${#authentication.name+'(이름)'}">유저네임정보</span>-->
+						<!-- <span th:text="${#authentication.name+'(이름)'}">유저네임정보</span> -->
 						<span sec:authentication="principal.email"></span>
 						(
 						<span th:if="${#authentication.principal.nickName==null}"
@@ -42,18 +43,49 @@
 			</div>
 		</nav>
 		<hr>
+		<section id="nb">
+			<h1>메뉴</h1>
+			<div class="wrap flex">
+				<nav id="gnb">
+					<h1>전체상품</h1>
+					<div class="wrap">
+						<script type="text/javascript">
+							$(function () {
+								$("#tot-menu").hover(function () {
+									//메뉴글씨 영역에 마우스가 들어오면 실행
+									$.ajax({
+										url: "/common/layout/categorys/0",
+										success: function (result) {
+											$("#cate1").html(result);
+										}
+									});
+								}, function () {
+
+								});
+							});
+						</script>
+						<dl id="tot-menu">
+							<dt>전체상품</dt>
+							<dd id="cate1">
+							</dd>
+						</dl>
+					</div>
+				</nav>
+				<nav id="lnb">
+					<h1>이벤트메뉴</h1>
+					<div class="wrap"></div>
+				</nav>
+			</div>
+		</section>
 	</div>
 </header>
-
-<!-- 메인영역이 삽입되는 지점입니다.-->
-
+<!-- 메인영역이 삽입되는 지점입니다. -->
 <th:block th:replace="${main}"/>
-
 <footer>
 	<h1>하단영역</h1>
 	<hr>
 	<div class="wrap view-size">
-		<p>회사정보와 약관등을 구현합니다.</p>
+		<p>회사정보와약관등</p>
 	</div>
 </footer>
 
